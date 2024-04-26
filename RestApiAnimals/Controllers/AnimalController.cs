@@ -16,12 +16,12 @@ namespace RestApiAnimals.Controllers
             _animalService = animalService;   
         }
 
-        [HttpGet]
-        public IActionResult GetAnimals(string orderBy)
+        [HttpGet("api/animal/{orderBy}")]
+        public IActionResult GetAnimals(string orderBy = "Name")
         {
-           var animals =  _animalService.GetAnimals();
+                var animals =  _animalService.GetAnimals(orderBy);
             
-            return Ok(animals);
+                return Ok(animals);
         }
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace RestApiAnimals.Controllers
         {
             _animalService.AddAnimal(animal);
             
-            return Ok("AddAnimal");
+            return Ok($"Dodano Animal poprawnie - {animal.name}");
         }
 
         [HttpPut("{id:int}")]   
@@ -37,7 +37,7 @@ namespace RestApiAnimals.Controllers
         {   
             _animalService.UpdateAnimal(id, animal);
             
-            return Ok("UpdateAnimal");  
+            return Ok($"Obiekt Animal zaktualizowany id = {id} name = {animal.name}");  
         }
 
         [HttpDelete("{id:int}")]
@@ -45,7 +45,7 @@ namespace RestApiAnimals.Controllers
         {
             _animalService.DeleteAnimal(id);
             
-            return Ok("DeleteAnimal");
+            return Ok($"Usunięto obiekt animal id = {id}");
         }
     }
 }

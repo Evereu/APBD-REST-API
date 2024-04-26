@@ -11,9 +11,9 @@ public class AnimalService : IAnimalService
         _animalRepository = animalRepository;
     }
     
-    public IEnumerable<Animal> GetAnimals()
-    {
-        var animals = _animalRepository.GetAnimals();
+    public IEnumerable<Animal> GetAnimals(String orderedColumn) 
+    {   
+        var animals = _animalRepository.GetAnimals(orderedColumn);
 
         return animals;
 
